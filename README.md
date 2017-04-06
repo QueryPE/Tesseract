@@ -9,7 +9,12 @@ Tesseract supports packet and event debug system (for plugin developers)**
 ## Notice
 
 **Tesseract is supported to Minecraft:PE 1.0.5 (PE & Win10) <br>
-Report any issues and we will try to fix them for you.**  
+Report any issues and we will try to fix them for you.**
+
+## Builds
+
+__Travis-CI Build:__<br>
+ [![Travis-CI](https://travis-ci.org/TesseractNetwork/Tesseract.svg?branch=master)](https://travis-ci.org/TesseractNetwork/Tesseract)<br>
 
 ## License
 
