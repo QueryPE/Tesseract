@@ -2,20 +2,22 @@
 
 /*
  *
- *  _____   _____   __   _   _   _____  __    __  _____
- * /  ___| | ____| |  \ | | | | /  ___/ \ \  / / /  ___/
- * | |     | |__   |   \| | | | | |___   \ \/ /  | |___
- * | |  _  |  __|  | |\   | | | \___  \   \  /   \___  \
- * | |_| | | |___  | | \  | | |  ___| |   / /     ___| |
- * \_____/ |_____| |_|  \_| |_| /_____/  /_/     /_____/
+ *    _______                                _
+ *   |__   __|                              | |
+ *      | | ___  ___ ___  ___ _ __ __ _  ___| |_
+ *      | |/ _ \/ __/ __|/ _ \  __/ _` |/ __| __|
+ *      | |  __/\__ \__ \  __/ | | (_| | (__| |_
+ *      |_|\___||___/___/\___|_|  \__,_|\___|\__|
+ *
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * @author iTX Technologies
- * @link https://itxtech.org
+ * @author Tesseract Network
+ * @link http://www.github.com/TesseractNetwork/Tesseract
+ * 
  *
  */
 
@@ -24,19 +26,21 @@ namespace pocketmine\entity;
 use pocketmine\network\protocol\AddEntityPacket;
 use pocketmine\Player;
 
-class CaveSpider extends Monster{
+class CaveSpider extends Monster {
+
 	const NETWORK_ID = 40;
 
 	public $width = 1;
 	public $length = 1;
 	public $height = 0.5;
 
-	public $dropExp = [5, 5];
+	public $maxhealth = 12;
+	public $dropExp = 5;
 
 	public function getName() : string{
 		return "Cave Spider";
 	}
-	
+
 	public function spawnTo(Player $player){
 		$pk = new AddEntityPacket();
 		$pk->eid = $this->getId();
@@ -54,4 +58,5 @@ class CaveSpider extends Monster{
 
 		parent::spawnTo($player);
 	}
+
 }

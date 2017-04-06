@@ -15,8 +15,8 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * @author Tesseract Team
- * @link http://www.github.com/TesseractTeam/Tesseract
+ * @author Tesseract Network
+ * @link http://www.github.com/TesseractNetwork/Tesseract
  * 
  *
  */
@@ -34,9 +34,9 @@ class Horse extends Living{
 	public function getName() : string{
 		return "Horse";
 	}
-	
+
 	public function setChestPlate($id){
-		/*	
+		/*
 		416, 417, 418, 419 only
 		*/
 		$pk = new MobArmorEquipmentPacket();
@@ -51,7 +51,7 @@ class Horse extends Living{
 			$player->dataPacket($pk);
 		}
 	}
-	
+
 	public function spawnTo(Player $player){
 		$pk = new AddEntityPacket();
 		$pk->eid = $this->getId();
