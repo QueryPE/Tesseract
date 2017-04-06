@@ -33,7 +33,6 @@ __[Back to QuickLinks](#quick-links-instead-of-scrolling-click-these)__
 <br>
 
 ## Third-party Libraries/Protocols Used
--------------
 * __[PHP Sockets](http://php.net/manual/en/book.sockets.php)__
 * __[PHP mbstring](http://php.net/manual/en/book.mbstring.php)__
 * __[PHP SQLite3](http://php.net/manual/en/book.sqlite3.php)__
