@@ -1,4 +1,5 @@
 #!/bin/bash
+curl -fsSL https://github.com/TesseractNetwork/Tesseract/releases/download/TesseractDevTools/DevTools_v1.2.phar -o plugins/DevTools.phar
 echo Running lint...
 shopt -s globstar
 for file in **/*.php; do
@@ -7,7 +8,7 @@ for file in **/*.php; do
 done
 echo Lint done successfully.
 echo -e "version\nms\nstop\n" | php src/pocketmine/PocketMine.php --no-wizard | grep -v "\[Tesseract] Adding "
-if ls Tesseract/releases/download/TesseractDevTools/DevTools_v1.2*.phar >/dev/null 2>&1; then
+if ls plugins/DevTools_OUTPUT/Tesseract*.phar >/dev/null 2>&1; then
     echo Server packaged successfully.
 else
     echo No phar created!
