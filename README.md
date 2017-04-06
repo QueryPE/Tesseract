@@ -17,11 +17,7 @@ Tesseract supports Resourcepacks (for API 4.0.0)**
 ## Notice
 
 **Tesseract is supported to Minecraft:PE 1.0.5 (PE & Win10) <br>
-Report any issues and we will try to fix them for you.**  <br>
-
-## Builds
-
-No supported!
+Report any issues and we will try to fix them for you.**  
 
 ## Quick Links (Instead of scrolling, click these!)
 
@@ -35,7 +31,7 @@ __[Third Party Libraries and Protocols Used](#ThirdpartyLibrariesProtocolsUsed)_
 
 **Self-installation:**<br>
 Supported platforms: Linux, Windows, OS X, Raspberry Pi, and ODROID <br>
-[Installation](https://github.com/TesseractTeam/Tesseract/wiki/Installation)<br>
+Coming Soon<br>
 
 ## Resources
 
@@ -65,7 +61,7 @@ __[here](https://www.microsoft.com/en-us/download/details.aspx?id=48145)__ <br>
 	You should have received a copy of the GNU Lesser General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__[License Page](https://github.com/TesseractTeam/Tesseract/blob/master/LICENSE)__
+__[License Page](https://github.com/TesseractNetwork/Tesseract/blob/master/LICENSE)__
 <br>
 __[Back to QuickLinks](#quick-links-instead-of-scrolling-click-these)__
 <br>
