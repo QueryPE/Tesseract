@@ -15,8 +15,8 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * @author Tessetact Team
- * @link http://www.github.com/TesseractTeam/Tesseract
+ * @author Tessetact Network
+ * @link http://www.github.com/TesseractNetwork/Tesseract
  * 
  *
  */
@@ -71,33 +71,33 @@ class EnderChest extends Transparent{
 	}
 
 	public function place(Item $item, Block $block, Block $target, $face, $fx, $fy, $fz, Player $player = null){
-			$faces = [
-				0 => 4,
-				1 => 2,
-				2 => 5,
-				3 => 3,
-			];
-			
-			$this->meta = $faces[$player instanceof Player ? $player->getDirection() : 0];
-			
-			$this->getLevel()->setBlock($block, $this, true, true);
-			$nbt = new CompoundTag("", [
-				new ListTag("Items", []),
-				new StringTag("id", Tile::ENDER_CHEST),
-				new IntTag("x", $this->x),
-				new IntTag("y", $this->y),
-				new IntTag("z", $this->z)
-			]);
-			$nbt->Items->setTagType(NBT::TAG_Compound);
+		$faces = [
+			0 => 4,
+			1 => 2,
+			2 => 5,
+			3 => 3,
+		];
 
-			if($item->hasCustomName()){
-				$nbt->CustomName = new StringTag("CustomName", $item->getCustomName());
-			}
+		$this->meta = $faces[$player instanceof Player ? $player->getDirection() : 0];
 
-			$tile = Tile::createTile("EnderChest", $this->getLevel(), $nbt);
+		$this->getLevel()->setBlock($block, $this, true, true);
+		$nbt = new CompoundTag("", [
+			new ListTag("Items", []),
+			new StringTag("id", Tile::ENDER_CHEST),
+			new IntTag("x", $this->x),
+			new IntTag("y", $this->y),
+			new IntTag("z", $this->z)
+		]);
+		$nbt->Items->setTagType(NBT::TAG_Compound);
 
-			return true;
+		if($item->hasCustomName()){
+			$nbt->CustomName = new StringTag("CustomName", $item->getCustomName());
 		}
+
+		Tile::createTile("EnderChest", $this->getLevel(), $nbt);
+
+		return true;
+	}
 
 	public function onBreak(Item $item){
 		$this->getLevel()->setBlock($this, new Air(), true, true);
