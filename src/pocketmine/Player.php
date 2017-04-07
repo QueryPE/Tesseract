@@ -140,6 +140,10 @@ use pocketmine\network\protocol\SetPlayerGameTypePacket;
 use pocketmine\network\protocol\TakeItemEntityPacket;
 use pocketmine\network\protocol\TextPacket;
 use pocketmine\network\protocol\UpdateAttributesPacket;
+use pocketmine\network\protocol\SetEntityDataPacket;
+use pocketmine\network\protocol\BossEventPacket;
+use pocketmine\network\protocol\AddEntityPacket;
+use pocketmine\network\protocol\RemoveEntityPacket;
 use pocketmine\network\protocol\UpdateBlockPacket;
 use pocketmine\network\SourceInterface;
 use pocketmine\resourcepacks\ResourcePack;
@@ -4033,6 +4037,57 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 		}
 	}
 
+    /**
+     * Creates and sends a BossBar to the player
+     * 
+     * @param text  The BossBar message
+     * @param length  The BossBar percentage
+     *
+     */
+    public function createBossBar($text = "", $bossID = null){
+    if($bossID != null){
+      $pk = new AddEntityPacket();
+      $pk->eid = $bossID;
+      $pk->type = 12;
+      $pk->x = $this->x;
+      $pk->y = $this->y;
+      $pk->z = $this->z;
+      $pk->yaw = 0;
+      $pk->pitch = 0;
+      $pk->metadata = [Entity::DATA_LEAD_HOLDER_EID => [Entity::DATA_TYPE_LONG, -1], Entity::DATA_FLAGS => [Entity::DATA_TYPE_LONG, 0 ^ 1 << Entity::DATA_FLAG_SILENT ^ 1 << Entity::DATA_FLAG_INVISIBLE], Entity::DATA_SCALE => [Entity::DATA_TYPE_FLOAT, 0], Entity::DATA_NAMETAG => [Entity::DATA_TYPE_STRING, $text], Entity::DATA_BOUNDING_BOX_WIDTH => [Entity::DATA_TYPE_FLOAT, 0], Entity::DATA_BOUNDING_BOX_HEIGHT => [Entity::DATA_TYPE_FLOAT, 0]];
+      $pk2 = new BossEventPacket();
+      $pk2->eid = $bossID;
+      $pk2->state = 0;
+      $this->dataPacket($pk);
+      $this->dataPacket($pk2);
+    } 
+    if($bossID == null){
+      $this->server->getLogger()->info(TextFormat::RED ."Could not Create a Boss Bar\nNo Boss ID was provided");
+     }
+    }
+    
+    public function updateBossBar($text = "", $bossID = null){
+    if($bossID != null){
+		$pk = new SetEntityDataPacket();
+		$pk->metadata = [Entity::DATA_LEAD_HOLDER_EID => [Entity::DATA_TYPE_LONG, -1], Entity::DATA_FLAGS => [Entity::DATA_TYPE_LONG, 0 ^ 1 << Entity::DATA_FLAG_SILENT ^ 1 << Entity::DATA_FLAG_INVISIBLE], Entity::DATA_SCALE => [Entity::DATA_TYPE_FLOAT, 0], Entity::DATA_NAMETAG => [Entity::DATA_TYPE_STRING, $text], Entity::DATA_BOUNDING_BOX_WIDTH => [Entity::DATA_TYPE_FLOAT, 0], Entity::DATA_BOUNDING_BOX_HEIGHT => [Entity::DATA_TYPE_FLOAT, 0]];
+        $pk->eid = $bossID;    
+        $this->dataPacket($pk);
+    }
+    if($bossID == null){
+      $this->server->getLogger()->info(TextFormat::RED ."Could not Update a Boss Bar\nNo Boss ID was provided");
+     }
+    }
+    
+    public function removeBossBar($bossID = null){
+    if($bossID != null){
+        $pk = new RemoveEntityPacket();
+		$pk->eid = $bossID;    
+        $this->dataPacket($pk);
+    }
+    if($bossID == null){
+      $this->server->getLogger()->info(TextFormat::RED ."Could not Remove a Boss Bar\nNo Boss ID was provided");
+     }
+    }
 
 	/**
 	 * @param Inventory $inventory
