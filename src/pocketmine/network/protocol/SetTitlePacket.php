@@ -37,15 +37,15 @@ class SetTitlePacket extends DataPacket{
 	public $type;
 	public $title;
 	public $fadeInDuration;
-	public $duration;
 	public $fadeOutDuration;
+	public $duration;
 
 	public function decode(){
 		$this->type = $this->getVarInt();
 		$this->title = $this->getString();
 		$this->fadeInDuration = $this->getVarInt();
-		$this->duration = $this->getVarInt();
 		$this->fadeOutDuration = $this->getVarInt();
+		$this->duration = $this->getVarInt();
 	}
 
 	public function encode(){
@@ -53,13 +53,13 @@ class SetTitlePacket extends DataPacket{
 		$this->putVarInt($this->type);
 		$this->putString($this->title);
 		$this->putVarInt($this->fadeInDuration);
-		$this->putVarInt($this->duration);
 		$this->putVarInt($this->fadeOutDuration);
+		$this->putVarInt($this->duration);
 	}
 
 	/**
 	 * @return PacketName|string
-     */
+	 */
 	public function getName(){
 		return "SetTitlePacket";
 	}

@@ -3419,12 +3419,11 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 			$message = $message->getText();
 
 		}
-		
+
   		$pk = new TextPacket();
   		$pk->type = TextPacket::TYPE_RAW;
   		$pk->message = $this->server->getLanguage()->translateString($message);
   		$this->dataPacket($pk);
-		
 
 		return true;
 	}
@@ -3484,21 +3483,22 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 	}
 	
 	/**
-     * Send a title text with/without a sub title text to a player
+	 * Send a title text with/without a sub title text to a player
 	 * -1 defines the default value used by the client
-     *
-     * @param $title
-     * @param string $subtitle
-     * @return bool
-     */
+	 *
+	 * @param $title
+	 * @param string $subtitle
+	 * @return bool
+	 */
 	public function sendTitle(string $title, string $subtitle = "", int $fadein = -1, int $fadeout = -1, int $duration = -1){
-          $this->prepareTitle($title, $subtitle, $fadein, $fadeout, $duration); //correct the bug but not optimized
-          $this->prepareTitle($title, $subtitle, $fadein, $fadeout, $duration);
+		//correct the bug but not optimized...
+		$this->prepareTitle($title, $subtitle, $fadein, $fadeout, $duration);
+		$this->prepareTitle($title, $subtitle, $fadein, $fadeout, $duration);
 	}
-	
+
 	/**
 	 * This code must be changed in the future but currently, send 2 packets fixes the subtitle bug... 
-    */
+	 */
  	private function prepareTitle(string $title, string $subtitle = "", int $fadein = -1, int $fadeout = -1, int $duration = -1){
 		$pk = new SetTitlePacket();
 		$pk->type = SetTitlePacket::TYPE_TITLE;
@@ -3507,7 +3507,7 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 		$pk->fadeOutDuration = $fadeout;
 		$pk->duration = $duration;
 		$this->dataPacket($pk);
-		
+
 		if($subtitle !== ""){
 			$pk = new SetTitlePacket();
 			$pk->type = SetTitlePacket::TYPE_SUB_TITLE;
@@ -3562,7 +3562,7 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 			$this->removeEffect(Effect::HEALTH_BOOST);
 
 			$this->connected = false;
-			
+
 			foreach($this->server->getOnlinePlayers() as $player){
 				if(!$player->canSee($this)){
 					$player->showPlayer($this);
@@ -3577,9 +3577,9 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 			foreach($this->usedChunks as $index => $d){
 				Level::getXZ($index, $chunkX, $chunkZ);
 				$this->level->unregisterChunkLoader($this, $chunkX, $chunkZ);
-                foreach($this->level->getChunkEntities($chunkX, $chunkZ) as $entity){
-                    $entity->despawnFrom($this, false);
-                }
+				foreach($this->level->getChunkEntities($chunkX, $chunkZ) as $entity){
+					$entity->despawnFrom($this, false);
+				}
 				unset($this->usedChunks[$index]);
 			}
 
@@ -3588,18 +3588,18 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 			if($this->loggedIn){
 				$this->server->removeOnlinePlayer($this);
 			}
-			
+
 			if(strlen($this->getName()) > 0){
 				$this->server->getPluginManager()->callEvent($ev = new PlayerQuitEvent($this, $message, true));
 				if($this->loggedIn === true and $ev->getAutoSave()){
 					$this->save();
 				}
-				
+
 				if($this->spawned !== false and $ev->getQuitMessage() != ""){
 					$this->server->broadcastMessage($ev->getQuitMessage());
 				}
 			}
-			
+
 			parent::close();
 
 			$this->loggedIn = false;
